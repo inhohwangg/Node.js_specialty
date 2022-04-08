@@ -7,7 +7,7 @@ const app = express()
 app.use(express.urlencoded({extended: false}), router)
 app.use(express.json())
 
-app.set('view', __dirname + '/views')
+app.set('views', __dirname + '/views')
 app.set('view engine', 'ejs')
 
 const connect = require('./schemas')
