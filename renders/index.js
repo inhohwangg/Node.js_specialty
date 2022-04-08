@@ -4,8 +4,8 @@ const registerRouter = require('./register')
 
 const router = express.Router()
 
-router.use('/login', loginRouter)
-router.use('/register', registerRouter)
+router.use('/user/login', loginRouter)
+router.use('/user/register', registerRouter)
 
 module.exports = router 
 
