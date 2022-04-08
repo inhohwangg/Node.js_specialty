@@ -14,5 +14,4 @@ const write_modifySchema = ({
     }
 })
 
-
 module.exports = mongoose.model('Wrire_modify', write_modifySchema)
