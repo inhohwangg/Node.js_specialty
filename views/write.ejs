@@ -18,17 +18,19 @@
         <form action="/write_modify/user/postadd" enctype="multipart/form-data" method="post">       
             <dl>
                 <dt>제목</dt>
-            <dd><input type="text" name="title" placeholder="제목 입력"></dd>
-                <dt>이미지</dt>
-                <dd><input type="file" name="image" id="image" accept="image/*"></dd>
+                <input type="text" name="title" placeholder="제목 입력">
+                <dt>내용</dt>
                 <textarea name="content" placeholder="내용 입력"></textarea>
+                <!-- <dt>이미지</dt> -->
+                <p><input type="file" name="image" id="image" accept="image/*"></p>
                 <dt> 
-                    <input type="submit" id="uploadbtn" onclick="upload()" 등록>     
+                         
                     
                 </dt>
                 
             </dl>  
-       </form>         
+       </form>
+       <input type="submit" id="uploadbtn" onclick="upload()" 등록>         
        <button onclick="window.location.href = '/user/main'" class="d-line" >취소</button>
 </body>
 </html>
