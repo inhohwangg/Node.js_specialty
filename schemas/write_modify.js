@@ -2,16 +2,26 @@ const mongoose = require('mongoose')
 const {Schema} = mongoose
 
 const write_modifySchema = ({
-    title : String,
-    image: {
-        date : Buffer,
-        contentType : String,
+    title: {
+        type: String,
+      
+      }, 
+      image: {
+        type: String,
+      
+      }, 
+      content: {
+        type: String,
+        
+      },
+      createdAt : {
+        type : String,
+        
     },
-    content : String,
-    createdAt : {
-        type : Date,
-        default : Date.now,
-    }
-})
+      post_id: {
+        type: Number,    
+        
+      }
+    });
 
-module.exports = mongoose.model('Wrire_modify', write_modifySchema)
+module.exports = mongoose.model('Write_modify', write_modifySchema)
