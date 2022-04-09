@@ -71,7 +71,7 @@ router.post("/auth", async (req, res) => {
 
     //exec() 메소드는 일치 검색을 실행합니다. 결과 배열 또는 null 을 반환합니다 .
     // 클라가 입력한 정보로 DB조회 
-    const user = await User.findOne({id}).exec();
+    const user = await User.findOne({ id, password}).exec();
      //console.log(user); // 값 들어옴 
 
     if (!user) {  //사용자가 없다면 
