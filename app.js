@@ -2,6 +2,7 @@ const express = require('express')
 const jwt = require("jsonwebtoken"); //jwt 모듈 불러오기 
 const renders = require('./renders')
 const router = require('./routers')
+const cors = require('cors')
 const app = express()
 
 
