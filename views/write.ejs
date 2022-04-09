@@ -7,9 +7,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Document</title>
 </head>
-
+<script>
+    function upload() {
+        if (confirm('파일을 업로드 하시겠습니까?')) {
+            window.location.href= '/user/main'
+        }
+    }
+</script>
 <body>           
-        <form action="/api/postadd" enctype="multipart/form-data" method="post">       
+        <form action="/write_modify/postadd" enctype="multipart/form-data" method="post">       
             <dl>
                 <dt>제목</dt>
             <dd><input type="text" name="title" placeholder="제목 입력"></dd>
@@ -17,12 +23,12 @@
                 <dd><input type="file" name="image" id="image" accept="image/*"></dd>
                 <textarea name="content" placeholder="내용 입력"></textarea>
                 <dt> 
-                    <input type="submit" id="uploadbtn" 등록>     
-                    <button onclick="window.location.href = '/'" >취소</button>
+                    <input type="submit" id="uploadbtn" onclick="upload()" 등록>     
+                    
                 </dt>
                 
             </dl>  
        </form>         
-    
+       <button onclick="window.location.href = '/user/main'" class="d-line" >취소</button>
 </body>
 </html>

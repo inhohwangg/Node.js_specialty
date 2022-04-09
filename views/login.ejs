@@ -14,7 +14,7 @@
   $(document).ready(function () {
        if (localStorage.getItem("token")) {
            alert("이미 로그인이 되어있습니다.")
-           window.location.replace("/");
+           window.location.replace("/user/main");
         } 
   });
   function sign_in() {
@@ -30,7 +30,7 @@
         localStorage.setItem("id", id);
         alert("로그인이 완료되었습니다!")
         //alert(response["msg"])
-        window.location.replace("/");
+        window.location.replace("/user/main");
       },
       error: function (xhr, ajaxSettings, thrownError) {
         alert("아이디 혹은 패스워드를 다시 확인해주세요.")

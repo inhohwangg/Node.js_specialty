@@ -22,18 +22,8 @@ connect()
 app.use('/api', router)
 app.use('/api/user', router)
 app.use('/', renders)
+  
 
-app.get('/',(req,res)=>{
-    res.render("main.ejs")
-  });
-  
-  app.get('/detail',(req,res)=>{
-    res.render("detail.ejs")
-  });
-  
-  app.get('/postadd',(req,res)=>{
-    res.render("write.ejs")
-  });
 app.listen(3000, () => {
     let dir = './uploadedFiles';     
   if (!fs.existsSync(dir)) fs.mkdirSync(dir); // 서버가 켜졌을때 업로드 폴더가 없으면 업로드 폴더생성
