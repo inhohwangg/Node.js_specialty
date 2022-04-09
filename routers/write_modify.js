@@ -44,7 +44,7 @@ let storage  = multer.diskStorage({ //이미지 업로드 미들웨어
 	res.redirect('/user/main')
   });
 
-//메이페이지 불러오기
+//메인페이지 불러오기
 router.get('/user/main', async (req, res) => {	
 
 	const board = await Write_modify.find({});
