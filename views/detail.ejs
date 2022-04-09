@@ -23,7 +23,11 @@
            
             $.ajax({
                 type: "GET",
+<<<<<<< Updated upstream
                 url: `/write_modify/detail/${post_id}`,
+=======
+                url: `/write_modify/user/detail/${post_id}`,
+>>>>>>> Stashed changes
                 data: {},
                 success: function (response) {                   
                     
@@ -46,6 +50,6 @@
 <body>
     <h4 id="detailpage"></h4>
 
-    <button>수정</button>
+    <button href="/user/write">수정</button>
 </body>
 </html>

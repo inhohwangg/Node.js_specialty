@@ -17,7 +17,7 @@ let storage  = multer.diskStorage({ //이미지 업로드 미들웨어
 
 
   //게시글작성
-  router.post('/postadd', uploadWithOriginalFilename.single('image'),async(req,res)=>{ 
+  router.post('/user/postadd', uploadWithOriginalFilename.single('image'),async(req,res)=>{ 
 	console.log('연결')
 	const image = req.file.filename
 	const { title, content } = req.body
@@ -55,7 +55,7 @@ router.get('/user/main', async (req, res) => {
 });
 
 //상세페이지 불러오기
-router.get("/detail/:post_id", async (req, res) => {
+router.get("/user/detail/:post_id", async (req, res) => {
 	const { post_id } = req.params;	
 	
 	const [board] = await Write_modify.find({ post_id: Number(post_id) });
