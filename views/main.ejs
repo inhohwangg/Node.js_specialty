@@ -17,7 +17,7 @@
              
              $.ajax({
                  type: "GET",
-                 url: "/api/main",
+                 url: "/write_modify/user/main",
                  data: {},
                  success: function (response) {                    
                      let rows = response['board']
@@ -35,7 +35,7 @@
                             let temp_html =`
                                          <div class="title">${title}</div> 
                                          <div class="title">${createdAt}</div> 
-                                         <a href="detail/?post_id=${post_id}"><img width='300px' height='200px'  src="${image}"> </a> 
+                                         <a href="detail/?post_id=${post_id}"><img width='300px' height='200px'  src= "http://localhost:3000/${image}"> </a> 
                                          <div class="content">${content}</div>                           
                                          `                       
                            $('#content_list').append(temp_html)              
