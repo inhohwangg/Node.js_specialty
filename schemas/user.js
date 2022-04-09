@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
-    user : String,
+    id : String,
     password: String,
-    passwordconfirm : String,
+    passwordCheck : String,
 })
 UserSchema.virtual('userId').get(function () {
     return this._id.toHexString()

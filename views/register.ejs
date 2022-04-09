@@ -6,7 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입 화면</title>
 </head>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+       if (localStorage.getItem("token")) {
+           alert("이미 로그인이 되어있습니다.")
+           window.location.replace("/");
+        } 
+    });
+  function sign_up() {
+    const id = $("#id").val();
+    const password = $("#password").val();
+    const passwordCheck = $("#passwordCheck").val();
+    $.ajax({
+      type: "POST",
+      url: "/user/users",
+      data: {id, password, passwordCheck},
+     success: function (response) {
+        alert(response["msg"])
+        location.href = "/user/login"
+      },
+      error: function (error) {
+        alert(error.responseJSON.errorMessage);
+        },
+    });
+  }
+
+</script>
+
 <body>
-    <h1>회원가입 페이지입니다.</h1>
+  <input type="text" placeholder="아이디" id="id" /></br>
+  <input type="password" placeholder="비밀번호" id="password" /></br>
+  <input type="password" placeholder="비밀번호확인" id="passwordCheck" /></br>
+  <button type="button" onclick="sign_up()">회원가입</button>
+  <button type="button" onclick="location.href = '/user/login'">취소</button>
 </body>
+
 </html>

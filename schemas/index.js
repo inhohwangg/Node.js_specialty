@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const connect = () => {
     mongoose
-        .connect('mongodb://localhost:27017/post_list', {
+        .connect('mongodb://localhost:27017/Mini', {
             ignoreUndefined: true,
         })
         .catch((err) => console.log(err))

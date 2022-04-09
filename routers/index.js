@@ -5,6 +5,6 @@ const Write_modify = require('./write_modify')
 const router = express.Router()
 
 router.use('/write_modify/', Write_modify)
-router.use('/', User)
+router.use('/user', User)
 
 module.exports = router
