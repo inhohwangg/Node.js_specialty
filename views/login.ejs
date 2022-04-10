@@ -32,8 +32,8 @@
         //alert(response["msg"])
         window.location.replace("/user/main");
       },
-      error: function (xhr, ajaxSettings, thrownError) {
-        alert("아이디 혹은 패스워드를 다시 확인해주세요.")
+      error: function (error) {
+       alert(error.responseJSON.errorMessage);
       },
     });
   }
