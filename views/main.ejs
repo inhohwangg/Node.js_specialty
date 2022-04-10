@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Document</title>
+    <title>메인페이지</title>
 </head>
 
 <script>
@@ -17,7 +17,7 @@
              
              $.ajax({
                  type: "GET",
-                 url: "/api/main",
+                 url: "/write_modify/user/main",
                  data: {},
                  success: function (response) {                    
                      let rows = response['board']
@@ -35,7 +35,7 @@
                             let temp_html =`
                                          <div class="title">${title}</div> 
                                          <div class="title">${createdAt}</div> 
-                                         <a href="detail/?post_id=${post_id}"><img width='300px' height='200px'  src="${image}"> </a> 
+                                         <a href="detail/?post_id=${post_id}"><img width='300px' height='200px'  src="http://localhost:3000/${image}"> </a> 
                                          <div class="content">${content}</div>                           
                                          `                       
                            $('#content_list').append(temp_html)              
@@ -46,7 +46,7 @@
          } 
 </script>
 <body>
-    <a href="/postadd">글쓰기</a>
+    <a href="/user/write">글쓰기</a>
 
     <div id="content_list">
        

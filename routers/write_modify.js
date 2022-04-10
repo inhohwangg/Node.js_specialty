@@ -17,7 +17,7 @@ let storage  = multer.diskStorage({ //이미지 업로드 미들웨어
 
 
   //게시글작성
-  router.post('/postadd', uploadWithOriginalFilename.single('image'),async(req,res)=>{ 
+  router.post('/user/postadd', uploadWithOriginalFilename.single('image'),async(req,res)=>{ 
 	console.log('연결')
 	const image = req.file.filename
 	const { title, content } = req.body
@@ -27,7 +27,7 @@ let storage  = multer.diskStorage({ //이미지 업로드 미들웨어
 	let createdAt = today.toLocaleString()
 	let post_id = 0
 	
-	const Post_ls = await Board.find();		
+	const Post_ls = await Write_modify.find();		
 	if(Post_ls.length){
 		post_id = Post_ls[Post_ls.length-1]['post_id'] + 1
 	}else{
@@ -41,11 +41,11 @@ let storage  = multer.diskStorage({ //이미지 업로드 미들웨어
 	await Write_modify.create({ image, title, content, post_id, createdAt });
 	
 	
-	res.redirect('/')
+	res.redirect('/user/main')
   });
 
-//메이페이지 불러오기
-router.get('/main', async (req, res) => {	
+//메인페이지 불러오기
+router.get('/user/main', async (req, res) => {	
 
 	const board = await Write_modify.find({});
 	
@@ -55,7 +55,7 @@ router.get('/main', async (req, res) => {
 });
 
 //상세페이지 불러오기
-router.get("/detail/:post_id", async (req, res) => {
+router.get("/user/detail/:post_id", async (req, res) => {
 	const { post_id } = req.params;	
 	
 	const [board] = await Write_modify.find({ post_id: Number(post_id) });
