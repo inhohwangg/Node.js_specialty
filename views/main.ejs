@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+
+<script>
+        $(document).ready(function () {  
+          showpage()
+         });
+
+         function showpage() {
+             
+             $.ajax({
+                 type: "GET",
+                 url: "/api/main",
+                 data: {},
+                 success: function (response) {                    
+                     let rows = response['board']
+                     
+                     
+                     for (let i = rows.length-1; i > -1; i--) {
+                         let title = rows[i]['title']
+                         let image = rows[i]['image']
+                         let content = rows[i]['content']
+                         let post_id = rows[i]['post_id']
+                         let createdAt = rows[i]['createdAt']
+                         console.log(image)
+
+                       
+                            let temp_html =`
+                                         <div class="title">${title}</div> 
+                                         <div class="title">${createdAt}</div> 
+                                         <a href="detail/?post_id=${post_id}"><img width='300px' height='200px'  src="${image}"> </a> 
+                                         <div class="content">${content}</div>                           
+                                         `                       
+                           $('#content_list').append(temp_html)              
+                    }
+                
+                 }
+             });
+         } 
+</script>
+<body>
+    <a href="/postadd">글쓰기</a>
+
+    <div id="content_list">
+       
+    </div> 
+</body>
+</html>

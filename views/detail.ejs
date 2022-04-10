@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<script>
+      const quaryString = window.location.search;
+         console.log(quaryString)
+         const urlParams = new URLSearchParams(quaryString);
+         console.log(urlParams)
+         const post_id = urlParams.get("post_id");
+         console.log(post_id)
+     
+         $(document).ready(function () {  
+             detailpage();
+        }); 
+
+        function detailpage(){
+           
+            $.ajax({
+                type: "GET",
+                url: `/api/detail/${post_id}`,
+                data: {},
+                success: function (response) {                   
+                    
+                    let rows = response['board']                    
+
+                    let title = rows['title']
+                    let image  = rows['image']
+                    let content = rows['content']          
+                    console.log(image)
+
+                        let temp_html =`<div>${title}</div>
+                                        <div><img width='300px' height='200px' src="http://localhost:3000/${image}"> </div>
+                                        <div>${content}</div>
+                                        `                                                                                                                                      
+                    $('#detailpage').append(temp_html)
+        }
+    })
+}
+</script>
+<body>
+    <h4 id="detailpage"></h4>
+
+    <button>수정</button>
+</body>
+</html>

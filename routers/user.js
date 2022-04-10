@@ -81,6 +81,8 @@ router.post("/auth", async (req, res) => {
         return;
     }
     const token = jwt.sign({ userId: user.userId }, "seceret_my_key");
+     //localStorage.setItem("token", response.token)
+     //localStorage.setItem("id", id);
     //응답값으로 클라에게 토큰 생성해서 보내줌 
     res.send({token});
    // res.json({ msg: "로그인이 완료 되었습니다." });
