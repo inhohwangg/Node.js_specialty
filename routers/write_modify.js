@@ -66,5 +66,26 @@ router.get("/user/detail/:post_id", async (req, res) => {
 	});
 });
 
+//게시글 삭제
+router.delete("/user/delete/:post_id", async(req, res) =>{
+	const { post_id } = req.params
+	
+	await Write_modify.find({post_id: Number(post_id)});		
+
+	res.json({success: "삭제가 완료되었습니다!"});
+});
+
+//게시글 수정
+router.patch("/user/postmodify/:post_id", async (req, res)=>{
+	const { post_id } = req.params
+	const { title, content } = req.body
+	const image = req.file.filename
+
+	
+	await Write_modify.updateOne({post_id: Number(post_id)}, { $set: {title, content, image }}) 	
+	
+	
+	 res.json({success: "수정이 완료되었습니다!"})
+})
 
 module.exports = router
