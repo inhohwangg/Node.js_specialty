@@ -10,7 +10,7 @@ const authMiddleware = require("../routers/auth-middleware")
 router.post("/users", async (req, res) => {
     //회원가입창(프런트앤드)에서 받아오는 값 
     const { id, password, passwordCheck } = req.body;
-    //console.log(id, password, password2); //값 넘어옴
+    //console.log(id, password, passwordCheck); //값 넘어옴
     //아이디는 `최소 3자 이상, 알파벳 대소문자(a~z, A~Z), 숫자(0~9)`로 구성하기
     const re_id = /^[a-zA-Z0-9]{3,10}$/;
     const re_password = /^[a-zA-Z0-9]{4,30}$/;
@@ -53,7 +53,7 @@ router.post("/users", async (req, res) => {
         return;
     }
     //이전에 가입한 정보가 없다면, user변수에 저장(회원가입)
-    const user = new User({ id, password });
+    const user = new User({ id, password, passwordCheck });
     res.json({ msg: "회원가입이 완료 되었습니다." });
     await user.save(); //users변수 db에 저장
 
