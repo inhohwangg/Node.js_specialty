@@ -2,13 +2,13 @@ const express = require('express')
 const jwt = require("jsonwebtoken"); //jwt 모듈 불러오기 
 const renders = require('./renders')
 const router = require('./routers')
-//const cors = require('cors')
-
-const fs = require('fs'); // 파일시스템
+const cors = require('cors')
 const app = express()
 
-// 모든 도메인 허용 
-//app.use(cors());
+const fs = require('fs'); // 파일시스템
+
+// // 모든 도메인 허용 
+app.use(cors());
 
 
 app.use(express.static('uploadedFiles'))
@@ -24,7 +24,7 @@ connect()
 app.use('/api', router)
 app.use('/api/user', router)
 app.use('/', renders)
-  
+
 
 app.listen(3000, () => {
     let dir = './uploadedFiles';     
