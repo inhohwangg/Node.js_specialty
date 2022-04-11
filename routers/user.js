@@ -5,6 +5,7 @@ const { send } = require("express/lib/response"); //응답해주는 역할을 �
 const jwt = require("jsonwebtoken");
 const res = require("express/lib/response");
 const authMiddleware = require("../routers/auth-middleware")
+const cors = require('cors')
 
 //회원가입
 router.post("/users", async (req, res) => {
