@@ -50,6 +50,7 @@ router.get('/user/main', async (req, res) => {
 	const board = await Write_modify.find({});
 	
 	res.json({
+		
 		board
 	});
 });

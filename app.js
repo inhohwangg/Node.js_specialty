@@ -7,7 +7,7 @@ const fs = require('fs'); // 파일시스템
 const app = express()
 
 
-app.use(cors());
+app.use(cors());//프론트의 호스트 URL을 받아야한다.
 
 app.use(express.static('uploadedFiles'))
 app.use(express.urlencoded({extended: false}), router)
@@ -22,7 +22,7 @@ connect()
 app.use('/api', router)
 app.use('/api/user', router)
 app.use('/', renders)
-  
+
 
 app.listen(3000, () => {
     let dir = './uploadedFiles';     
