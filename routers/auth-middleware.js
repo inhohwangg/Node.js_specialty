@@ -4,7 +4,7 @@ const User = require("../schemas/user")
 
 module.exports = (req, res, next) => {
     const {authorization} = req.headers;
-    const [tokenType, tokenValue] = authorization.split(' ');
+    const [tokenType, tokenValue] = authorization.split(' '); //토큰의 유효성을 확인하겠다.
     if (tokenType !== 'Bearer') {
         res.status(401).send({
             errorMessage: "로그인 후 사용하세요.",

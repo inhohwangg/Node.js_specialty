@@ -22,8 +22,8 @@ const connect = require('./schemas')
 connect()
 
 app.use('/api', router)
-app.use('/api/user', router)
-app.use('/', renders)
+// app.use('/api/user', router)
+// app.use('/', renders)
 
 
 app.listen(3000, () => {
