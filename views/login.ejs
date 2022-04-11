@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 화면</title>
+    <title>로그인 화면입니다.</title>
 </head>
 <body>
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
@@ -27,7 +27,6 @@
       success: function (response) {
         //서버로부터 받은  token을 브라우저 로컬스토리지로 전달. 
         localStorage.setItem("token", response.token)
-        localStorage.setItem("id", id);
         alert("로그인이 완료되었습니다!")
         //alert(response["msg"])
         window.location.replace("/user/main");
@@ -41,6 +40,7 @@
 
 
 <body>
+  <h2>로그인화면입니다!!</h2>
   <input type="text" placeholder="아이디" id="id" /> </br>
   <input type="password" placeholder="비밀번호" id="password" /></br>
   <button type="button" onclick="sign_in()">로그인</button>
