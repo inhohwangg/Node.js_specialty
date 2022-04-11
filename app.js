@@ -2,12 +2,12 @@ const express = require('express')
 const jwt = require("jsonwebtoken"); //jwt 모듈 불러오기 
 const renders = require('./renders')
 const router = require('./routers')
-// const cors = require('cors')
+const cors = require('cors')
 const fs = require('fs'); // 파일시스템
 const app = express()
 
 // // 모든 도메인 허용 
-// app.use(cors());
+app.use(cors());
 // >>>>>>> 8ce82e16b8285c71b2c3e116ced8965bbf089d5a
 
 
