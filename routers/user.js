@@ -63,7 +63,6 @@ router.post("/users", async (req, res) => {
 
 
 
-
 //로그인 유효성 검사 및 토큰 발급 
 router.post("/auth", async (req, res) => {
     const { id, password } = req.body;
