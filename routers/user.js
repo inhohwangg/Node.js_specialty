@@ -19,26 +19,26 @@ router.post("/users", async (req, res) => {
 
     if (password !== passwordCheck) {
         res.status(412).send({ //400 status 코드 보내기 
-            errorMessage: "비밀번호가 일치하지 않습니다."
+            msg: "비밀번호가 일치하지 않습니다."
         });
         //유효성 검사 후 아래 코드 실행하지 못하도록 return 사용. 
         return;
     }
     if (id.search(re_id) == -1) {
         res.status(412).send({
-            errorMessage: "ID의 형식이 일치하지 않습니다."
+            msg: "ID의 형식이 일치하지 않습니다."
         });
         return;
     }
     if (password.search(re_password) == -1) {
         res.status(412).send({
-            errorMessage: "패스워드 형식이 일치하지 않습니다."
+            msg: "패스워드 형식이 일치하지 않습니다."
         });
         return;
     }
     if (password.search(id) != -1) {
             res.status(412).send({
-                errorMessage: "패스워드에 닉네임이 포함되어 있습니다."
+                msg: "패스워드에 닉네임이 포함되어 있습니다."
             });
             return;
         }
