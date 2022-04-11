@@ -71,7 +71,7 @@ router.post("/auth", async (req, res) => {
 
     //exec() 메소드는 일치 검색을 실행합니다. 결과 배열 또는 null 을 반환합니다 .
     // 클라가 입력한 정보로 DB조회 
-    const user = await User.findOne({ id, password}).exec();
+    const user = await User.findOne({ id, password }).exec();
      //console.log(user); // 값 들어옴 
 
     if (!user) {  //사용자가 없다면 
@@ -81,6 +81,8 @@ router.post("/auth", async (req, res) => {
         return;
     }
     const token = jwt.sign({ userId: user.userId }, "seceret_my_key");
+     //localStorage.setItem("token", response.token)
+     //localStorage.setItem("id", id);
     //응답값으로 클라에게 토큰 생성해서 보내줌 
     res.send({token});
    // res.json({ msg: "로그인이 완료 되었습니다." });

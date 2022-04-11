@@ -2,12 +2,14 @@ const express = require('express')
 const jwt = require("jsonwebtoken"); //jwt 모듈 불러오기 
 const renders = require('./renders')
 const router = require('./routers')
-const cors = require('cors')
+// const cors = require('cors')
 const fs = require('fs'); // 파일시스템
 const app = express()
 
+// // 모든 도메인 허용 
+// app.use(cors());
+// >>>>>>> 8ce82e16b8285c71b2c3e116ced8965bbf089d5a
 
-app.use(cors());//프론트의 호스트 URL을 받아야한다.
 
 app.use(express.static('uploadedFiles'))
 app.use(express.urlencoded({extended: false}), router)
@@ -29,5 +31,7 @@ app.listen(3000, () => {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir); // 서버가 켜졌을때 업로드 폴더가 없으면 업로드 폴더생성
     console.log('3000번 서버가 정상적으로 켜졌습니다')
 })
+
+
 
 module.exports = app
