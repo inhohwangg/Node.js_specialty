@@ -4,7 +4,6 @@ const renders = require('./renders')
 const router = require('./routers')
 const cors = require('cors')
 const app = express()
-
 const fs = require('fs'); // 파일시스템
 
 // // 모든 도메인 허용 

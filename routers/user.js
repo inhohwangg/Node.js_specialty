@@ -5,7 +5,7 @@ const { send } = require("express/lib/response"); //응답해주는 역할을 �
 const jwt = require("jsonwebtoken");
 const res = require("express/lib/response");
 const authMiddleware = require("../routers/auth-middleware")
-const cors = require('cors')
+
 
 //회원가입
 router.post("/users", async (req, res) => {
@@ -48,7 +48,7 @@ router.post("/users", async (req, res) => {
         id,
     });
     if (existUsers.length) { //사용자의 정보가 db에 존재한다면
-        res.status(400).send({
+        res.status(412).send({
             errorMessage: "이미 가입된 아이디가 있습니다."
         });
         return;
@@ -73,9 +73,9 @@ router.post("/auth", async (req, res) => {
     //exec() 메소드는 일치 검색을 실행합니다. 결과 배열 또는 null 을 반환합니다 .
     // 클라가 입력한 정보로 DB조회 
     const user = await User.findOne({ id, password }).exec();
-     console.log(user); // 값 들어옴 
+     console.log(user); // 값 들어옴
 
-    if (!user) {  //사용자가 없다면 
+    if (!user) {  //사용자가 없다면
         res.status(401).send({
             errorMessage: "아이디 또는 패스워드를 다시 확인해주세요."
         });
@@ -106,8 +106,6 @@ router.get('/me', authMiddleware, async (req, res) => {
         return;
     }
 });
-
-
 
 
 

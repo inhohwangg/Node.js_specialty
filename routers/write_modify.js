@@ -48,9 +48,8 @@ let storage  = multer.diskStorage({ //이미지 업로드 미들웨어
 router.get('/user/main', async (req, res) => {	
 
 	const board = await Write_modify.find({});
-	
+	console.log(board)
 	res.json({
-		
 		board
 	});
 });
