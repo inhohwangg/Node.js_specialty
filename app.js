@@ -24,6 +24,7 @@ app.use('/api', router)
 app.use('/', renders)  
 
 
+
 app.listen(3000, () => {
     console.log('3000번 서버가 정상적으로 켜졌습니다')
 })
