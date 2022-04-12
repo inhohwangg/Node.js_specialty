@@ -9,25 +9,22 @@ const authMiddleware = require("../routers/auth-middleware")
 //회원가입 중복검사
 router.post("/users/idCheck", async (req, res) => {
     //회원가입창(프런트앤드)에서 받아오는 값 
-    const { id, password, passwordCheck } = req.body;
-    console.log(id, password, passwordCheck); //값 넘어옴
+    const { id } = req.body;
+   // console.log(id, password, passwordCheck); //값 넘어옴
 
     const existUsers = await User.find({
         id,
     });
-    if (existUsers.length < 1) { //사용자의 정보가 db에 존재한다면
+    if (existUsers.length < 1) { //사용자의 정보가 
         res.status(200).send({
            msg: "사용가능한 아이디입니다."
         });
-        //return;
     }
     else if(existUsers.length) { //사용자의 정보가 db에 존재한다면
         res.status(400).send({
             errorMessage: "이미 가입된 아이디가 있습니다."
         });
-        //return;
     }
-    //res.json({})
 });
 
 
