@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.1111.0",
+    "aws-sdk": "^2.1112.0",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
     "ejs": "^3.1.6",

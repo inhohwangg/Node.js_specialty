@@ -10,7 +10,7 @@ const authMiddleware = require("../routers/auth-middleware")
 router.post("/users/idCheck", async (req, res) => {
     //회원가입창(프런트앤드)에서 받아오는 값 
     const { id, password, passwordCheck } = req.body;
-    console.log(id, password, passwordCheck); //값 넘어옴
+    //console.log(id, password, passwordCheck); //값 넘어옴
 
     const existUsers = await User.find({
         id,
@@ -19,15 +19,12 @@ router.post("/users/idCheck", async (req, res) => {
         res.status(200).send({
            msg: "사용가능한 아이디입니다."
         });
-        //return;
     }
     else if(existUsers.length) { //사용자의 정보가 db에 존재한다면
         res.status(400).send({
             errorMessage: "이미 가입된 아이디가 있습니다."
         });
-        //return;
     }
-    //res.json({})
 });
 
 
@@ -35,7 +32,7 @@ router.post("/users/idCheck", async (req, res) => {
 router.post("/users", async (req, res) => {
     //회원가입창(프런트앤드)에서 받아오는 값 
     const { id, password, passwordCheck} = req.body;
-    console.log(id, password, passwordCheck); //값 넘어옴
+    //console.log(id, password, passwordCheck); //값 넘어옴
     
     //이전에 가입한 정보가 없다면, user변수에 저장(회원가입)
     const user = new User({ id, password });
@@ -58,14 +55,14 @@ router.post("/auth", async (req, res) => {
     const user = await User.findOne({ id, password }).exec();
     // console.log(user); // 값 들어옴 
 
-    if (!user) {  //사용자가 없다면 
+    if (!user) {  //회원가입된 사용자가 없다면 
         res.status(401).send(
             {errorMessage: "아이디 또는 패스워드를 다시 확인해주세요."}
         );
         return;
     }
-    const token = jwt.sign({ userId: user.userId }, "seceret_my_key");
     //응답값으로 클라에게 토큰 생성해서 보내줌 
+    const token = jwt.sign({ userId: user.userId }, "seceret_my_key");
     res.send({token});
 });
 
