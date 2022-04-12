@@ -6,9 +6,8 @@ const cors = require('cors')
 const app = express()
 const fs = require('fs'); // 파일시스템
 
-// // 모든 도메인 허용 
+// 모든 도메인 허용 
 app.use(cors());
-
 
 app.use(express.static('uploadedFiles'))
 app.use(express.urlencoded({extended: false}), router)
@@ -21,9 +20,8 @@ const connect = require('./schemas')
 connect()
 
 app.use('/api', router)
-// app.use('/api/user', router)
-// app.use('/', renders)
-
+app.use('/api/user', router)
+app.use('/', renders)
 
 app.listen(3000, () => {
     let dir = './uploadedFiles';     
