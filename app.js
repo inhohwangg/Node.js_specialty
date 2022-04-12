@@ -22,12 +22,10 @@ connect()
 
 app.use('/api', router)
 // app.use('/api/user', router)
-// app.use('/', renders)
+app.use('/', renders)
 
 
 app.listen(3000, () => {
-    let dir = './uploadedFiles';     
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir); // 서버가 켜졌을때 업로드 폴더가 없으면 업로드 폴더생성
     console.log('3000번 서버가 정상적으로 켜졌습니다')
 })
 
