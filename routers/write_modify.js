@@ -1,28 +1,36 @@
 const express = require('express')
 const Write_modify = require('../schemas/write_modify')
 const router = express.Router()
-const multer = require('multer')
+const authMiddleware = require("../routers/auth-middleware")
 
+const path = require("path");
+let AWS = require("aws-sdk");
+//AWS.config.loadFromPath(path.join(__dirname, "../config/s3.json")); // 인증
+let s3 = new AWS.S3();
 
-let storage  = multer.diskStorage({ //이미지 업로드 미들웨어    
-	destination(req, file, cb) {
-	  cb(null, 'uploadedFiles/');
-	},
-	filename(req, file, cb) {
-	  cb(null, `${Date.now()}__${file.originalname}`);
-	},
-  });
-  let upload = multer({ dest: 'uploadedFiles/' });
-  let uploadWithOriginalFilename = multer({ storage: storage }); 
+let multer = require("multer");
+let multerS3 = require('multer-s3');
+let upload = multer({
 
-
-  //게시글작성
-  router.post('/user/postadd', uploadWithOriginalFilename.single('image'),async(req,res)=>{ 
-	console.log('연결')
-	const image = req.file.filename
-	const { title, content } = req.body
-	
-	console.log(title, content , image)
+    storage: multerS3({
+        s3: s3,
+        bucket: "sparta-bucket-jw",
+        key: function (req, file, cb) {
+             let extension = path.extname(file.originalname);
+             cb(null, Date.now().toString() + extension)
+        },
+        acl: 'public-read-write',
+    })
+})
+//게시글작성
+router.post('/user/postadd',authMiddleware, upload.single('image'), async (req, res) => {
+    try {
+        console.log("req.file: ", req.file); // 테스트 => req.file.location에 이미지 링크(s3-server)가 담겨있음 
+		const { title, content } = req.body
+		const image = req.file.location
+		const {id} = res.locals.user
+		console.log(id)
+	console.log(title, content,image)
 	let today = new Date();
 	let createdAt = today.toLocaleString()
 	let post_id = 0
@@ -38,17 +46,21 @@ let storage  = multer.diskStorage({ //이미지 업로드 미들웨어
 			errorMessage: "빈칸 없이 모두 입력해주세요"		
 		});	
 	}	
-	await Write_modify.create({ image, title, content, post_id, createdAt });
-	
-	
-	res.redirect('/user/main')
-  });
+	await Write_modify.create({ image, title, content, post_id, createdAt, id  });
+    } catch (err) {
+        console.log(err);
+        response(res, 500, "서버 에러")
+    }
+});
+
+
+
 
 //메인페이지 불러오기
 router.get('/user/main', async (req, res) => {	
 
 	const board = await Write_modify.find({});
-	console.log(board)
+	// console.log(board)
 	res.json({
 		board
 	});
@@ -56,7 +68,7 @@ router.get('/user/main', async (req, res) => {
 
 //상세페이지 불러오기
 router.get("/user/detail/:post_id", async (req, res) => {
-	const { post_id } = req.params;	
+	const { post_id } = req.body;	
 	
 	const [board] = await Write_modify.find({ post_id: Number(post_id) });
 	
@@ -67,19 +79,22 @@ router.get("/user/detail/:post_id", async (req, res) => {
 });
 
 //게시글 삭제
-router.delete("/user/delete/:post_id", async(req, res) =>{
-	const { post_id } = req.params
+router.delete("/user/delete/:post_id",authMiddleware, async(req, res) =>{
+	const { post_id } = req.body
+	console.log(post_id)
+	const {user} = res.locals;
 	
-	await Write_modify.find({post_id: Number(post_id)});		
+	await Write_modify.deleteOne({post_id: Number(post_id)});		
 
 	res.json({success: "삭제가 완료되었습니다!"});
 });
 
 //게시글 수정
-router.patch("/user/postmodify/:post_id", async (req, res)=>{
-	const { post_id } = req.params
+router.patch("/user/postmodify/:post_id",authMiddleware,upload.single('image'), async (req, res)=>{
+	const { post_id } = req.body
 	const { title, content } = req.body
-	const image = req.file.filename
+	const image = req.file.location
+	const {user} = res.locals;
 
 	
 	await Write_modify.updateOne({post_id: Number(post_id)}, { $set: {title, content, image }}) 	

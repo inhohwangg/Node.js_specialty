@@ -21,7 +21,11 @@ const write_modifySchema = ({
       post_id: {
         type: Number,    
         
-      }
+      },
+      id : {
+        type : String,
+        
+    }
     });
 
 module.exports = mongoose.model('Write_modify', write_modifySchema)
