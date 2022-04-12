@@ -16,16 +16,12 @@
            window.location.replace("/user/main");
         } 
     });
-
     function sign_up_check() {
     const id = $("#id").val();
-    const password = $("#password").val();
-    const passwordCheck = $("#passwordCheck").val();
-    console.log(id)
     $.ajax({
       type: "POST",
       url: "/user/users/idCheck/",
-      data: {id, password, passwordCheck},
+      data: {id},
       success: function (response) {
         alert(response["msg"])
         sign_up();
@@ -38,7 +34,6 @@
 
   function sign_up() {
     const id = $("#id").val();
-    console.log(id)
     const password = $("#password").val();
     const passwordCheck = $("#passwordCheck").val();
     $.ajax({
