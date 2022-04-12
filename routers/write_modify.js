@@ -68,7 +68,7 @@ router.get('/user/main', async (req, res) => {
 
 //상세페이지 불러오기
 router.get("/user/detail/:post_id", async (req, res) => {
-	const { post_id } = req.body;	
+	const { post_id } = req.params;	
 	
 	const [board] = await Write_modify.find({ post_id: Number(post_id) });
 	
@@ -80,7 +80,7 @@ router.get("/user/detail/:post_id", async (req, res) => {
 
 //게시글 삭제
 router.delete("/user/delete/:post_id",authMiddleware, async(req, res) =>{
-	const { post_id } = req.body
+	const { post_id } = req.params
 	console.log(post_id)
 	const {user} = res.locals;
 	
@@ -91,7 +91,7 @@ router.delete("/user/delete/:post_id",authMiddleware, async(req, res) =>{
 
 //게시글 수정
 router.patch("/user/postmodify/:post_id",authMiddleware,upload.single('image'), async (req, res)=>{
-	const { post_id } = req.body
+	const { post_id } = req.params
 	const { title, content } = req.body
 	const image = req.file.location
 	const {user} = res.locals;
