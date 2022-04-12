@@ -23,11 +23,13 @@ let upload = multer({
     })
 })
 //게시글작성
-router.post('/user/postadd', upload.single('image'), async (req, res) => {
+router.post('/user/postadd',authMiddleware, upload.single('image'), async (req, res) => {
     try {
         console.log("req.file: ", req.file); // 테스트 => req.file.location에 이미지 링크(s3-server)가 담겨있음 
 		const { title, content } = req.body
 		const image = req.file.location
+		const {id} = res.locals.user
+		console.log(id)
 	console.log(title, content,image)
 	let today = new Date();
 	let createdAt = today.toLocaleString()
@@ -44,7 +46,7 @@ router.post('/user/postadd', upload.single('image'), async (req, res) => {
 			errorMessage: "빈칸 없이 모두 입력해주세요"		
 		});	
 	}	
-	await Write_modify.create({ image, title, content, post_id, createdAt });
+	await Write_modify.create({ image, title, content, post_id, createdAt, id  });
     } catch (err) {
         console.log(err);
         response(res, 500, "서버 에러")
@@ -81,7 +83,7 @@ router.delete("/user/delete/:post_id", async(req, res) =>{
 	const { post_id } = req.params
 	const {user} = res.locals;
 	
-	await Write_modify.find({post_id: Number(post_id)});		
+	await Write_modify.deleteOne({post_id: Number(post_id)});		
 
 	res.json({success: "삭제가 완료되었습니다!"});
 });
