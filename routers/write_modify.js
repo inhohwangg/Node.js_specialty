@@ -79,7 +79,7 @@ router.get("/user/detail/:post_id", async (req, res) => {
 });
 
 //게시글 삭제
-router.delete("/user/delete/:post_id", async(req, res) =>{
+router.delete("/user/delete/:post_id",authMiddleware, async(req, res) =>{
 	const { post_id } = req.params
 	const {user} = res.locals;
 	
@@ -89,7 +89,7 @@ router.delete("/user/delete/:post_id", async(req, res) =>{
 });
 
 //게시글 수정
-router.patch("/user/postmodify/:post_id", async (req, res)=>{
+router.patch("/user/postmodify/:post_id",authMiddleware, async (req, res)=>{
 	const { post_id } = req.params
 	const { title, content } = req.body
 	const image = req.file.filename
