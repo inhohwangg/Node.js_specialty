@@ -9,14 +9,7 @@ const authMiddleware = require("../routers/auth-middleware")
 //회원가입 중복검사
 router.post("/users/idCheck", async (req, res) => {
     //회원가입창(프런트앤드)에서 받아오는 값 
-<<<<<<< HEAD
-    const { id, password, passwordCheck } = req.body;
-    //console.log(id, password, passwordCheck); //값 넘어옴
-=======
     const { id } = req.body;
-   // console.log(id, password, passwordCheck); //값 넘어옴
->>>>>>> hyewon
-
     const existUsers = await User.find({
         id,
     });
