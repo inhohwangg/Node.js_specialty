@@ -16,6 +16,22 @@
            window.location.replace("/user/main");
         } 
     });
+    function sign_up_check() {
+    const id = $("#id").val();
+    $.ajax({
+      type: "POST",
+      url: "/user/users/idCheck/",
+      data: {id},
+      success: function (response) {
+        alert(response["msg"])
+        sign_up();
+      },
+      error: function (error) {
+        alert(error.responseJSON.errorMessage);
+        },
+    });
+  }
+
   function sign_up() {
     const id = $("#id").val();
     const password = $("#password").val();
@@ -24,7 +40,7 @@
       type: "POST",
       url: "/user/users",
       data: {id, password, passwordCheck},
-     success: function (response) {
+      success: function (response) {
         alert(response["msg"])
         location.href = "/"
       },
@@ -40,8 +56,10 @@
   <input type="text" placeholder="아이디" id="id" /></br>
   <input type="password" placeholder="비밀번호" id="password" /></br>
   <input type="password" placeholder="비밀번호확인" id="passwordCheck" /></br>
-  <button type="button" onclick="sign_up()">회원가입</button>
-  <button type="button" onclick="location.href = '/'">취소</button>
+
+  <button type="button" onclick="sign_up_check()">회원가입</button>
+  <button type="button" onclick="location.href = '/user/login'">취소</button>
+
 </body>
 
 </html>

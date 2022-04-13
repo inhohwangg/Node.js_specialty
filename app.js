@@ -5,6 +5,7 @@ const router = require('./routers')
 const cors = require('cors')
 const app = express()
 const fs = require('fs'); // 파일시스템
+
 const socketIo = require('socket.io')
 const server = require('http').createServer(app)
 // // 모든 도메인 허용 
@@ -16,6 +17,14 @@ const io = socketIo(server, {
     },
 })
 
+<<<<<<< HEAD
+=======
+
+// 모든 도메인 허용 
+app.use(cors());
+
+
+>>>>>>> e7919265bf6a610005fb9492eafe24054ffd15ee
 app.use(express.static('uploadedFiles'))
 app.use(express.urlencoded({extended: false}), router)
 app.use(express.json())
@@ -27,9 +36,10 @@ const connect = require('./schemas');
 const { Iot } = require('aws-sdk');
 connect()
 
+
 app.use('/api', router)
-// app.use('/api/user', router)
-app.use('/', renders)
+app.use('/', renders)  
+
 
 const socket = require('./src/socket')
 
