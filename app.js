@@ -17,14 +17,9 @@ const io = socketIo(server, {
     },
 })
 
-<<<<<<< HEAD
-=======
-
 // 모든 도메인 허용 
 app.use(cors());
 
-
->>>>>>> e7919265bf6a610005fb9492eafe24054ffd15ee
 app.use(express.static('uploadedFiles'))
 app.use(express.urlencoded({extended: false}), router)
 app.use(express.json())
