@@ -7,21 +7,18 @@ const app = express()
 const fs = require('fs'); // 파일시스템
 
 const socketIo = require('socket.io')
-const Http = require('http')
-const http = Http.createServer(app)
+const server = require('http').createServer(app)
 // // 모든 도메인 허용 
 
-const io = socketIo(http, {
+const io = socketIo(server, {
     cors : {
         origin:"*", //여기에 명시된 서버만 호스트만 내서버로 연결을 허용할거야
-        mothods:["GET","POST","DELETE"]
+        credentials: true,
     },
 })
 
-
 // 모든 도메인 허용 
 app.use(cors());
-
 
 app.use(express.static('uploadedFiles'))
 app.use(express.urlencoded({extended: false}), router)
@@ -39,9 +36,11 @@ app.use('/api', router)
 app.use('/', renders)  
 
 
+const socket = require('./src/socket')
 
-http.listen(3000, () => {
-    console.log('3000번 서버가 정상적으로 켜졌습니다')
+
+server.listen(4000, () => {
+    console.log('4000번 서버가 정상적으로 켜졌습니다')
 })
 
 io.on("connection", (socket)=> {
@@ -49,7 +48,5 @@ io.on("connection", (socket)=> {
 
     
 })
-
-
 
 module.exports = app
