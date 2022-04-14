@@ -31,7 +31,6 @@
 http://carrot31.shop/
 
 
-
 🎤Back-end 기술 스택 및 개발 환경
 ==================
 - JavaScirpt
@@ -44,4 +43,5 @@ http://carrot31.shop/
 - AWS-SDK
 - Cors
 - Fs
-- Socket.io
+- Socket.io   
+
