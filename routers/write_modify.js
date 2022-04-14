@@ -84,21 +84,22 @@ router.delete("/user/delete/:post_id",authMiddleware, async(req, res) =>{
 	const { post_id } = req.params
 	console.log(post_id)
 	const {user} = res.locals;
-	const video = await Write_modify.findOne(post_id)  // 현재 URL에 전달된 id값을 받아서 db찾음
-  	const url = video.fileUrl.split('/')    // video에 저장된 fileUrl을 가져옴
-  	const delFileName = url[url.length - 1]
+	const video = await Write_modify.find({post_id: Number(post_id)})  // 현재 URL에 전달된 id값을 받아서 db찾음
 	
-	await Write_modify.deleteOne({post_id: Number(post_id)});		
-	
-	s3.deleteObject({
-		Bucket: 'sparta-bucket-jw',
-		Key: delFileName  
-	}, (err, data) => {
-		if (err) { throw err; }
-	}); 
+	const url = video[0].image.split('/')    // video에 저장된 fileUrl을 가져옴
 
+	const delFileName = url[url.length - 1]
+
+	await Write_modify.deleteOne({post_id: Number(post_id)});
+	s3.deleteObject({
+			Bucket: 'sparta-bucket-jw',
+			Key: delFileName
+	}, (err, data) => {
+			if (err) { throw err; }
+	});
 	res.json({success: "삭제가 완료되었습니다!"});
 });
+
 
 //게시글 수정
 router.patch("/user/postmodify/:post_id",authMiddleware,upload.single('image'), async (req, res)=>{
