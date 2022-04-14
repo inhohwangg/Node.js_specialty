@@ -5,7 +5,7 @@ const authMiddleware = require("../routers/auth-middleware")
 
 const path = require("path");
 let AWS = require("aws-sdk");
-// AWS.config.loadFromPath(path.join(__dirname, "../config/s3.json")); // 인증
+AWS.config.loadFromPath(path.join(__dirname, "../config/s3.json")); // 인증
 let s3 = new AWS.S3();
 
 let multer = require("multer");
@@ -59,7 +59,7 @@ router.post('/user/postadd',authMiddleware, upload.single('image'), async (req, 
 //메인페이지 불러오기
 router.get('/user/main', async (req, res) => {	
 
-	const board = await Write_modify.find({});
+	const board = await Write_modify.find({}).sort({"post_id": -1});
 	// console.log(board)
 	res.json({
 		board
