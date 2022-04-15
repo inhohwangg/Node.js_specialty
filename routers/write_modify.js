@@ -90,7 +90,7 @@ router.delete("/user/delete/:post_id",authMiddleware, async(req, res) =>{
 });
 
 //게시글 수정
-router.patch("/user/postmodify/:post_id",authMiddleware,upload.single('image'), async (req, res)=>{
+router.patch("/user/postmodify/:post_id", authMiddleware, upload.single('image'), async (req, res)=>{
 	const { post_id } = req.params
 	const { title, content } = req.body
 	const image = req.file.location

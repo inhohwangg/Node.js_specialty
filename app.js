@@ -8,8 +8,8 @@ const fs = require('fs'); // 파일시스템
 
 const socketIo = require('socket.io')
 const server = require('http').createServer(app)
-// // 모든 도메인 허용 
 
+// 모든 도메인 허용 
 const io = socketIo(server, {
     cors : {
         origin:"*", //여기에 명시된 서버만 호스트만 내서버로 연결을 허용할거야
